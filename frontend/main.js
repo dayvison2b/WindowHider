@@ -2,10 +2,14 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const fs = require("fs");
 const { spawn, exec } = require("child_process");
-require("electron-reload")(__dirname, {
-  electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-  hardResetMethod: "exit",
-});
+
+// Only use electron-reload in development
+if (process.env.NODE_ENV === "development") {
+  require("electron-reload")(__dirname, {
+    electron: path.join(__dirname, "node_modules", ".bin", "electron"),
+    hardResetMethod: "exit",
+  });
+}
 
 let mainWindow;
 let activeChildProcesses = []; // Track active child processes

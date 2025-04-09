@@ -1,7 +1,7 @@
 const path = require("path");
 
-module.exports = {
-  mode: "development",
+module.exports = (env, argv) => ({
+  mode: argv.mode || "development",
   entry: "./app/page.jsx",
   output: {
     filename: "bundle.js",
@@ -24,4 +24,5 @@ module.exports = {
       "@": path.resolve(__dirname, "app"),
     },
   },
-};
+  devtool: argv.mode === "production" ? false : "source-map",
+});
