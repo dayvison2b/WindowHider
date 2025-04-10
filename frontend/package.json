@@ -49,13 +49,15 @@
         },
         "win": {
             "target": "nsis",
-            "icon": "public/incognito.ico"
+            "icon": "public/incognito.ico",
+            "artifactName": "${productName}-Setup-${version}.${ext}"
         },
         "nsis": {
             "oneClick": false,
             "allowToChangeInstallationDirectory": true,
             "createDesktopShortcut": true,
-            "createStartMenuShortcut": true
+            "createStartMenuShortcut": true,
+            "installerIcon": "public/incognito.ico"
         },
         "extraResources": [
             {
@@ -64,6 +66,13 @@
                 "filter": [
                     "winhider.exe",
                     "payload.dll"
+                ]
+            },
+            {
+                "from": "./dlls/",
+                "to": ".",
+                "filter": [
+                    "*.dll"
                 ]
             }
         ]

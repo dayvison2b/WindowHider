@@ -3,6 +3,14 @@ const path = require("path");
 const fs = require("fs");
 const { spawn, exec } = require("child_process");
 
+// Set up environment for DLLs
+if (process.platform === "win32" && process.env.NODE_ENV !== "development") {
+  // Add app directory to PATH - this is where the bundled DLLs are
+  const appPath = path.dirname(app.getPath("exe"));
+  process.env.PATH = `${appPath};${process.env.PATH}`;
+  console.log(`Added application path to PATH: ${appPath}`);
+}
+
 // Only use electron-reload in development
 if (process.env.NODE_ENV === "development") {
   require("electron-reload")(__dirname, {
@@ -133,7 +141,7 @@ function createWindow() {
   });
 
   // Open the DevTools
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 
   // Handle window close event
   mainWindow.on("closed", () => {

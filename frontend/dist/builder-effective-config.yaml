@@ -6,16 +6,21 @@ productName: WindowHider
 win:
   target: nsis
   icon: public/incognito.ico
+  artifactName: ${productName}-Setup-${version}.${ext}
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   createStartMenuShortcut: true
+  installerIcon: public/incognito.ico
 extraResources:
   - from: ../backend/Release/
     to: backend
     filter:
       - winhider.exe
       - payload.dll
+  - from: ./dlls/
+    filter:
+      - '*.dll'
 files: []
 electronVersion: 28.3.3
