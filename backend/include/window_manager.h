@@ -66,6 +66,10 @@ private:
     void CleanupInvalidEntries();
     bool VerifyWindowState(WindowState& state);
     void ScanForHiddenWindows();
+    
+    // Helper methods for managing multiple windows per process
+    int GetProcessWindowCount(DWORD processId) const;
+    bool IsLastProcessWindow(HWND hwnd) const;
 
     std::unordered_map<HWND, WindowState> hiddenWindows;
     std::wstring stateFilePath;

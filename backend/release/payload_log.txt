@@ -43,3 +43,524 @@
 [2025-04-10 18:00:29] Creating thread to call FreeLibraryAndExitThread
 [2025-04-10 18:00:29] Self-unload thread created successfully
 [2025-04-10 18:00:29] DLL_PROCESS_DETACH
+[2025-04-10 18:06:17] DLL_PROCESS_ATTACH
+[2025-04-10 18:06:17] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:22:59] DLL_PROCESS_DETACH
+[2025-04-10 18:24:04] DLL_PROCESS_ATTACH
+[2025-04-10 18:24:04] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:24:04] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:24:04] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:24:04] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:24:04] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:24:04] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:24:04] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:24:04] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:24:04] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:24:04] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:24:04] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:24:07] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 18:24:07] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 18:24:07] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:24:07] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:24:07] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:24:25] UnloadSelf called - preparing to unload DLL
+[2025-04-10 18:24:25] Resetting display affinity to WDA_NONE before unloading
+[2025-04-10 18:24:25] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 18:24:25] Attempting to set WDA_NONE
+[2025-04-10 18:24:25] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:24:25] Creating thread to call FreeLibraryAndExitThread
+[2025-04-10 18:24:25] Self-unload thread created successfully
+[2025-04-10 18:24:25] DLL_PROCESS_DETACH
+[2025-04-10 18:28:08] DLL_PROCESS_ATTACH
+[2025-04-10 18:28:08] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:28:08] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 18:28:08] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 18:28:08] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:28:08] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:28:08] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:28:08] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 18:28:08] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 18:28:08] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:28:08] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:28:08] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:28:11] ShowWindowInCapture called for window: 0000000000010746
+[2025-04-10 18:28:11] Attempting to set WDA_NONE
+[2025-04-10 18:28:11] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:30:49] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 18:30:49] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 18:30:49] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:30:49] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:30:49] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:30:49] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 18:30:49] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 18:30:49] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:30:49] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:30:49] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:30:52] ShowWindowInCapture called for window: 0000000000010746
+[2025-04-10 18:30:52] Attempting to set WDA_NONE
+[2025-04-10 18:30:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:41:57] DLL_PROCESS_ATTACH
+[2025-04-10 18:41:57] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:41:57] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:41:57] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:41:57] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:41:57] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:41:57] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:41:57] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 18:41:57] Attempting to set WDA_NONE
+[2025-04-10 18:41:57] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:13] DLL_PROCESS_ATTACH
+[2025-04-10 18:42:13] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:42:13] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:42:13] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:42:13] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:13] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:13] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:13] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:42:13] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:42:13] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:13] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:13] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:21] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:42:21] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:42:21] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:21] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:21] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:21] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:42:21] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:42:21] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:21] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:21] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:24] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:42:24] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:42:24] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:24] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:24] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:24] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 18:42:24] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 18:42:24] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:24] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:24] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:29] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:42:29] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:42:29] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:29] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:29] ShowWindowInCapture called for window: 000000000007029E
+[2025-04-10 18:42:29] Attempting to set WDA_NONE
+[2025-04-10 18:42:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:29] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:42:29] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:42:29] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:29] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:29] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 18:42:29] Attempting to set WDA_NONE
+[2025-04-10 18:42:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:29] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:42:29] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:42:29] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:42:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:42:29] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:42:29] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 18:42:29] Attempting to set WDA_NONE
+[2025-04-10 18:42:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:40] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:43:40] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:43:40] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:40] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:40] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:40] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:43:40] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:43:40] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:40] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:40] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:41] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:43:41] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:43:41] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:41] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:41] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:41] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:43:41] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:43:41] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:41] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:41] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:42] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:43:42] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:43:42] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:42] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:42] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:42] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 18:43:42] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 18:43:42] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:42] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:42] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:44] DLL_PROCESS_ATTACH
+[2025-04-10 18:43:44] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:43:44] SetTargetWindow called with window handle: 0x70072
+[2025-04-10 18:43:44] HideWindowFromCapture called for window: 0000000000070072
+[2025-04-10 18:43:44] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:44] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:44] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:44] SetTargetWindow called with window handle: 0x70072
+[2025-04-10 18:43:44] HideWindowFromCapture called for window: 0000000000070072
+[2025-04-10 18:43:44] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:44] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:44] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:55] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:43:55] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:43:55] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:55] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 18:43:55] Attempting to set WDA_NONE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:43:55] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:43:55] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:55] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 18:43:55] Attempting to set WDA_NONE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:43:55] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:43:55] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:55] ShowWindowInCapture called for window: 000000000007029E
+[2025-04-10 18:43:55] Attempting to set WDA_NONE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] SetTargetWindow called with window handle: 0x70072
+[2025-04-10 18:43:55] HideWindowFromCapture called for window: 0000000000070072
+[2025-04-10 18:43:55] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:43:55] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:43:55] ShowWindowInCapture called for window: 0000000000070072
+[2025-04-10 18:43:55] Attempting to set WDA_NONE
+[2025-04-10 18:43:55] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:26] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:45:26] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:45:26] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:26] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:26] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:26] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:45:26] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:45:26] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:26] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:26] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:27] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:45:27] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:45:27] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:27] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:27] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:27] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:45:27] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:45:27] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:27] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:27] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:29] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:45:29] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:45:29] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:29] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:29] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 18:45:29] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 18:45:29] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:29] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:34] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:45:34] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:45:34] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:34] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:34] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 18:45:34] Attempting to set WDA_NONE
+[2025-04-10 18:45:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:34] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 18:45:34] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 18:45:34] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:34] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:34] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 18:45:34] Attempting to set WDA_NONE
+[2025-04-10 18:45:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:34] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 18:45:34] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 18:45:34] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:45:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:45:34] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:45:34] ShowWindowInCapture called for window: 000000000007029E
+[2025-04-10 18:45:34] Attempting to set WDA_NONE
+[2025-04-10 18:45:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:48:58] DLL_PROCESS_ATTACH
+[2025-04-10 18:48:58] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:48:58] SetTargetWindow called with window handle: 0x908da
+[2025-04-10 18:48:58] HideWindowFromCapture called for window: 00000000000908DA
+[2025-04-10 18:48:58] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:48:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:48:58] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:48:58] SetTargetWindow called with window handle: 0x1209b4
+[2025-04-10 18:48:58] HideWindowFromCapture called for window: 00000000001209B4
+[2025-04-10 18:48:58] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:48:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:48:58] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:50:30] SetTargetWindow called with window handle: 0x908da
+[2025-04-10 18:50:30] HideWindowFromCapture called for window: 00000000000908DA
+[2025-04-10 18:50:30] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:50:30] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:50:30] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:50:30] ShowWindowInCapture called for window: 00000000001209B4
+[2025-04-10 18:50:30] Attempting to set WDA_NONE
+[2025-04-10 18:50:30] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:50:35] SetTargetWindow called with window handle: 0x908da
+[2025-04-10 18:50:35] HideWindowFromCapture called for window: 00000000000908DA
+[2025-04-10 18:50:35] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:50:35] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:50:35] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:50:35] ShowWindowInCapture called for window: 00000000000908DA
+[2025-04-10 18:50:35] Attempting to set WDA_NONE
+[2025-04-10 18:50:35] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:13] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 19:00:13] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 19:00:13] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:13] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:13] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:13] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 19:00:13] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 19:00:13] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:13] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:13] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:26] SetTargetWindow called with window handle: 0x7029e
+[2025-04-10 19:00:26] HideWindowFromCapture called for window: 000000000007029E
+[2025-04-10 19:00:26] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:26] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:26] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:26] ShowWindowInCapture called for window: 000000000007029E
+[2025-04-10 19:00:26] Attempting to set WDA_NONE
+[2025-04-10 19:00:26] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:41] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:00:41] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:00:41] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:41] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:41] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:41] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:00:41] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:00:41] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:41] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:41] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:42] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:00:42] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:00:42] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:42] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:42] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:42] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 19:00:42] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 19:00:42] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:42] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:42] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:43] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 19:00:43] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 19:00:43] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:43] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:43] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:43] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 19:00:43] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 19:00:43] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:43] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:43] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:52] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:00:52] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:00:52] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:52] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:52] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 19:00:52] Attempting to set WDA_NONE
+[2025-04-10 19:00:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:52] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:00:52] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:00:52] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:52] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:52] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 19:00:52] Attempting to set WDA_NONE
+[2025-04-10 19:00:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:52] SetTargetWindow called with window handle: 0x10746
+[2025-04-10 19:00:52] HideWindowFromCapture called for window: 0000000000010746
+[2025-04-10 19:00:52] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:00:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:00:52] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:00:52] ShowWindowInCapture called for window: 0000000000010746
+[2025-04-10 19:00:52] Attempting to set WDA_NONE
+[2025-04-10 19:00:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:51] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:03:51] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:03:51] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:51] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:51] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:51] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:03:51] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:03:51] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:51] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:51] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:52] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:03:52] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:03:52] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:52] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:52] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 19:03:52] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 19:03:52] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:52] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:52] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:58] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:03:58] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:03:58] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:58] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:58] ShowWindowInCapture called for window: 000000000009004A
+[2025-04-10 19:03:58] Attempting to set WDA_NONE
+[2025-04-10 19:03:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:58] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:03:58] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:03:58] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:58] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:58] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 19:03:58] Attempting to set WDA_NONE
+[2025-04-10 19:03:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:58] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:03:58] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:03:58] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:03:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:03:58] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:03:58] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 19:03:58] Attempting to set WDA_NONE
+[2025-04-10 19:03:58] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:02] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:02] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:02] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:02] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:02] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:02] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:02] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:02] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:02] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:02] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:04] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:04] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:04] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:04] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:04] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:04] SetTargetWindow called with window handle: 0x5059a
+[2025-04-10 19:04:04] HideWindowFromCapture called for window: 000000000005059A
+[2025-04-10 19:04:04] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:04] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:04] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:12] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:12] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:12] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:12] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:12] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:12] ShowWindowInCapture called for window: 000000000005059A
+[2025-04-10 19:04:12] Attempting to set WDA_NONE
+[2025-04-10 19:04:12] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:12] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:04:12] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:04:12] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:12] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:12] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:12] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 19:04:12] Attempting to set WDA_NONE
+[2025-04-10 19:04:12] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:12] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:12] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:12] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:12] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:12] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:12] ShowWindowInCapture called for window: 000000000009004A
+[2025-04-10 19:04:12] Attempting to set WDA_NONE
+[2025-04-10 19:04:12] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:17] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:17] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:17] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:17] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:17] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:17] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:17] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:17] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:17] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:17] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:24] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:24] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:24] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:24] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:24] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:24] SetTargetWindow called with window handle: 0x5059a
+[2025-04-10 19:04:24] HideWindowFromCapture called for window: 000000000005059A
+[2025-04-10 19:04:24] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:24] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:24] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:33] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:04:33] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:04:33] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:33] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:33] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:33] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:04:33] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:04:33] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:33] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:33] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:34] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:04:34] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:04:34] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:34] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:34] SetTargetWindow called with window handle: 0x1509ae
+[2025-04-10 19:04:34] HideWindowFromCapture called for window: 00000000001509AE
+[2025-04-10 19:04:34] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:34] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:34] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:39] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:39] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:39] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:39] ShowWindowInCapture called for window: 000000000009004A
+[2025-04-10 19:04:39] Attempting to set WDA_NONE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:04:39] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:04:39] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:39] ShowWindowInCapture called for window: 00000000001509AE
+[2025-04-10 19:04:39] Attempting to set WDA_NONE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] SetTargetWindow called with window handle: 0xa080a
+[2025-04-10 19:04:39] HideWindowFromCapture called for window: 00000000000A080A
+[2025-04-10 19:04:39] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:39] ShowWindowInCapture called for window: 00000000000A080A
+[2025-04-10 19:04:39] Attempting to set WDA_NONE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:39] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:39] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:39] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:39] ShowWindowInCapture called for window: 000000000005059A
+[2025-04-10 19:04:39] Attempting to set WDA_NONE
+[2025-04-10 19:04:39] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:53] SetTargetWindow called with window handle: 0x9004a
+[2025-04-10 19:04:53] HideWindowFromCapture called for window: 000000000009004A
+[2025-04-10 19:04:53] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 19:04:53] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:04:53] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 19:04:53] ShowWindowInCapture called for window: 000000000009004A
+[2025-04-10 19:04:53] Attempting to set WDA_NONE
+[2025-04-10 19:04:53] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 19:05:24] DLL_PROCESS_DETACH
+[2025-04-10 19:06:32] DLL_PROCESS_DETACH
+[2025-04-10 19:13:59] DLL_PROCESS_DETACH

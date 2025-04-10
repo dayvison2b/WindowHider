@@ -66,9 +66,12 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
         return TRUE;
     }
     
+    // Get window title
+    std::wstring windowTitle = data->manager->GetWindowTitle(hwnd);
+    
     // Get process name
     std::wstring processName = data->manager->GetProcessName(hwnd);
-    if (processName.empty()) {
+    if (processName.empty() && windowTitle.empty()) {
         return TRUE;
     }
     
@@ -79,7 +82,7 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
         return TRUE;
     }
     
-    // Add to list - use process name only
+    // Store the process name for now - we'll enhance this later in GetAllVisibleWindows
     data->windows[hwnd] = processName;
     
     return TRUE;
@@ -316,24 +319,75 @@ bool WindowManager::HideWindow(HWND hwnd) {
         return false;
     }
     
-    // Inject DLL
+    // Always inject the DLL into the process - each process has its own memory space
     Injector injector;
-    if (injector.InjectDLL(processId, dllPath)) {
-        state.isInjected = true;
-        hiddenWindows[hwnd] = state;
-        return true;
+    bool injectionResult = injector.InjectDLL(processId, dllPath);
+    
+    if (!injectionResult) {
+        std::cout << "[ERROR] Failed to inject DLL into process" << std::endl;
+        return false;
     }
     
-    return false;
+    // Call SetTargetWindow with this specific window handle
+    if (!injector.CallExportedFunction(processId, dllPath, "SetTargetWindow", (DWORD_PTR)hwnd)) {
+        std::cout << "[ERROR] Failed to call SetTargetWindow for window" << std::endl;
+        return false;
+    }
+    
+    state.isInjected = true;
+    hiddenWindows[hwnd] = state;
+    return true;
+}
+
+int WindowManager::GetProcessWindowCount(DWORD processId) const {
+    int count = 0;
+    for (const auto& pair : hiddenWindows) {
+        if (pair.second.processId == processId) {
+            count++;
+        }
+    }
+    return count;
+}
+
+bool WindowManager::IsLastProcessWindow(HWND hwnd) const {
+    auto it = hiddenWindows.find(hwnd);
+    if (it == hiddenWindows.end()) {
+        return true; // Not found, so it's the "last" by default
+    }
+    
+    DWORD processId = it->second.processId;
+    return GetProcessWindowCount(processId) <= 1;
 }
 
 bool WindowManager::ShowWindow(HWND hwnd) {
     std::cout << "[DEBUG] Starting show process for window handle: " << hwnd << std::endl;
     
+    // First check if the window is actually still hidden
+    if (!HasDisplayAffinity(hwnd)) {
+        std::cout << "[DEBUG] Window is already shown (no display affinity)" << std::endl;
+        
+        // Remove from our hidden windows list if it's there
+        auto it = hiddenWindows.find(hwnd);
+        if (it != hiddenWindows.end()) {
+            hiddenWindows.erase(it);
+            SaveState();
+        }
+        
+        return true;
+    }
+    
     // Find the window state
     auto it = hiddenWindows.find(hwnd);
     if (it == hiddenWindows.end()) {
         std::cout << "[ERROR] Window not found in hidden windows list" << std::endl;
+        
+        // Try direct method anyway
+        BOOL directResult = SetWindowDisplayAffinity(hwnd, WDA_NONE);
+        if (directResult) {
+            std::cout << "[DEBUG] Successfully showed window via direct method" << std::endl;
+            return true;
+        }
+        
         return false;
     }
     
@@ -345,80 +399,140 @@ bool WindowManager::ShowWindow(HWND hwnd) {
     BOOL success = GetWindowDisplayAffinity(hwnd, &affinity);
     std::cout << "[DEBUG] Current display affinity: " << (success ? std::to_string(affinity) : "unknown") << std::endl;
     
-    // If this window wasn't hidden with DLL injection, just use direct method
-    if (!state.isInjected) {
-        std::cout << "[DEBUG] Window was hidden using direct method, trying direct unhide..." << std::endl;
-        BOOL result = SetWindowDisplayAffinity(hwnd, WDA_NONE);
-        std::cout << "[DEBUG] Direct SetWindowDisplayAffinity result: " << (result ? "success" : "failed") << std::endl;
+    // Check if this window is using DLL injection
+    bool isUsingDLL = state.isInjected;
+    bool isLastWindow = IsLastProcessWindow(hwnd);
+    
+    std::cout << "[DEBUG] Window uses DLL injection: " << (isUsingDLL ? "yes" : "no") << std::endl;
+    std::cout << "[DEBUG] Is last window for this process: " << (isLastWindow ? "yes" : "no") << std::endl;
+    
+    // First try direct method
+    std::cout << "[DEBUG] Trying direct display affinity reset first..." << std::endl;
+    BOOL directResult = SetWindowDisplayAffinity(hwnd, WDA_NONE);
+    
+    if (directResult) {
+        std::cout << "[DEBUG] Successfully reset display affinity directly" << std::endl;
         
-        // Check if it worked
+        // Check if it actually worked
         DWORD checkAffinity = 0;
-        if (GetWindowDisplayAffinity(hwnd, &checkAffinity)) {
-            std::cout << "[DEBUG] New display affinity: " << checkAffinity << std::endl;
-            if (checkAffinity == WDA_NONE) {
-                hiddenWindows.erase(it);
-                SaveState();
-                return true;
-            }
-        }
-        
-        // If direct method failed, nothing more we can do
-        if (!result) {
-            std::cout << "[ERROR] Failed to unhide window with direct method" << std::endl;
-            return false;
-        }
-    }
-    
-    // Otherwise use DLL ejection method
-    // Get DLL path
-    std::wstring dllPath = Injector::GetDLLPath();
-    std::cout << "[DEBUG] Using DLL: " << utf16_to_utf8(dllPath) << std::endl;
-    
-    // Eject DLL
-    std::cout << "[DEBUG] Attempting to eject DLL from process..." << std::endl;
-    bool ejected = Injector::EjectDLL(state.processId, dllPath);
-    std::cout << "[DEBUG] DLL ejection result: " << (ejected ? "success" : "failed") << std::endl;
-    
-    if (!ejected) {
-        std::cout << "[ERROR] Failed to eject DLL" << std::endl;
-        
-        // Try to force the display affinity back to normal anyway
-        std::cout << "[DEBUG] Attempting to force display affinity to WDA_NONE" << std::endl;
-        BOOL forcedResult = SetWindowDisplayAffinity(hwnd, WDA_NONE);
-        std::cout << "[DEBUG] Force display affinity result: ";
-        if (forcedResult) {
-            std::cout << "success" << std::endl;
-        } else {
-            std::cout << "failed (Error: " << GetLastError() << ")" << std::endl;
-        }
-        
-        if (forcedResult) {
-            // Even though DLL ejection failed, we successfully reset the display affinity
+        BOOL checkResult = GetWindowDisplayAffinity(hwnd, &checkAffinity);
+        if (checkResult && checkAffinity == WDA_NONE) {
             hiddenWindows.erase(it);
             SaveState();
             return true;
         }
+    } else {
+        // If we get access denied (error 5), try to reinject the DLL
+        if (GetLastError() == 5) {
+            std::cout << "[DEBUG] Access denied when trying direct method, attempting to reinject DLL" << std::endl;
+            // Try to reinject the DLL in case it was unloaded
+            std::wstring dllPath = Injector::GetDLLPath();
+            Injector injector;
+            
+            // Reinject the DLL
+            bool reinjected = injector.InjectDLL(state.processId, dllPath);
+            if (reinjected) {
+                std::cout << "[DEBUG] Successfully reinjected DLL" << std::endl;
+                
+                // Call ShowWindowInCapture on the reinjected DLL
+                bool callResult = injector.CallExportedFunction(
+                    state.processId, 
+                    dllPath, 
+                    "ShowWindowInCapture", 
+                    (DWORD_PTR)hwnd
+                );
+                
+                if (callResult) {
+                    std::cout << "[DEBUG] Successfully called ShowWindowInCapture after reinjection" << std::endl;
+                    
+                    // Verify that the window was actually shown
+                    DWORD finalAffinity = 0;
+                    if (GetWindowDisplayAffinity(hwnd, &finalAffinity) && finalAffinity == WDA_NONE) {
+                        std::cout << "[DEBUG] Window display affinity confirmed reset to WDA_NONE" << std::endl;
+                        hiddenWindows.erase(it);
+                        SaveState();
+                        return true;
+                    }
+                }
+            }
+        }
         
-        return false;
+        std::cout << "[DEBUG] Direct display affinity reset failed, error: " << GetLastError() << std::endl;
     }
     
-    // Check display affinity after showing
-    affinity = 0;
-    success = GetWindowDisplayAffinity(hwnd, &affinity);
-    std::cout << "[DEBUG] Display affinity after DLL ejection: " << (success ? std::to_string(affinity) : "unknown") << std::endl;
+    // Try to use the existing DLL if it's still there
+    if (isUsingDLL) {
+        // Try to call the ShowWindowInCapture function in the DLL
+        std::cout << "[DEBUG] Calling ShowWindowInCapture for this window..." << std::endl;
+        
+        std::wstring dllPath = Injector::GetDLLPath();
+        Injector injector;
+        bool callResult = injector.CallExportedFunction(
+            state.processId, 
+            dllPath, 
+            "ShowWindowInCapture", 
+            (DWORD_PTR)hwnd
+        );
+        
+        if (callResult) {
+            std::cout << "[DEBUG] Successfully called ShowWindowInCapture" << std::endl;
+            
+            // Verify that the window was actually shown
+            DWORD finalAffinity = 0;
+            if (GetWindowDisplayAffinity(hwnd, &finalAffinity) && finalAffinity == WDA_NONE) {
+                std::cout << "[DEBUG] Window display affinity confirmed reset to WDA_NONE" << std::endl;
+                hiddenWindows.erase(it);
+                SaveState();
+                return true;
+            }
+        } else {
+            std::cout << "[ERROR] Failed to call ShowWindowInCapture" << std::endl;
+        }
+    }
     
-    // Remove from hidden windows
-    hiddenWindows.erase(it);
-    SaveState();
+    // If we got here, make one last attempt with administrator privileges
+    // This is a fallback for the case where access is denied
+    if (GetLastError() == 5) {
+        std::cout << "[DEBUG] Access denied throughout - window may need elevated privileges to unhide" << std::endl;
+        // Note: This would require elevation of the application, or it will fail
+        std::cout << "[DEBUG] Making final attempt to unhide window..." << std::endl;
+        
+        // Last attempt to force the display affinity
+        directResult = SetWindowDisplayAffinity(hwnd, WDA_NONE);
+        if (directResult) {
+            std::cout << "[DEBUG] Final attempt succeeded!" << std::endl;
+            hiddenWindows.erase(it);
+            SaveState();
+            return true;
+        }
+    }
     
-    std::cout << "[DEBUG] Window successfully shown" << std::endl;
-    return true;
+    // Final check if it worked by any means
+    DWORD finalAffinity = 0;
+    if (GetWindowDisplayAffinity(hwnd, &finalAffinity)) {
+        std::cout << "[DEBUG] Final window display affinity: " << finalAffinity << std::endl;
+        if (finalAffinity == WDA_NONE) {
+            std::cout << "[DEBUG] Window successfully shown" << std::endl;
+            hiddenWindows.erase(it);
+            SaveState();
+            return true;
+        }
+    }
+    
+    // If we got here, all attempts failed
+    std::cout << "[ERROR] All attempts to show window failed" << std::endl;
+    return false;
 }
 
 bool WindowManager::IsWindowHidden(HWND hwnd) const {
+    // First check if we're tracking this window
     auto it = hiddenWindows.find(hwnd);
-    if (it == hiddenWindows.end()) return false;
-    return it->second.isInjected;
+    if (it != hiddenWindows.end()) {
+        return true; // Window is in our hidden windows map
+    }
+    
+    // Also check display affinity in case it was hidden by another means
+    return HasDisplayAffinity(hwnd);
 }
 
 void WindowManager::ShowAllHiddenWindows() {
@@ -441,7 +555,22 @@ std::unordered_map<HWND, std::wstring> WindowManager::GetAllVisibleWindows() con
     // Enumerate windows
     EnumWindows(EnumWindowsProc, reinterpret_cast<LPARAM>(&data));
     
-    return data.windows;
+    // Enhance the output with window titles
+    std::unordered_map<HWND, std::wstring> enhancedData;
+    for (const auto& pair : data.windows) {
+        HWND hwnd = pair.first;
+        std::wstring processName = pair.second;
+        std::wstring windowTitle = GetWindowTitle(hwnd);
+        
+        // Combine process name with window title for better identification
+        if (!windowTitle.empty()) {
+            enhancedData[hwnd] = processName + L" - " + windowTitle;
+        } else {
+            enhancedData[hwnd] = processName;
+        }
+    }
+    
+    return enhancedData;
 }
 
 std::unordered_map<HWND, std::wstring> WindowManager::GetHiddenWindows() const {
@@ -454,10 +583,15 @@ std::unordered_map<HWND, std::wstring> WindowManager::GetHiddenWindows() const {
         HWND hwnd = pair.first;
         if (HasDisplayAffinity(hwnd)) {
             std::wstring processName = GetProcessName(hwnd);
-            if (!processName.empty()) {
+            std::wstring windowTitle = GetWindowTitle(hwnd);
+            
+            // Combine process name with window title for better identification
+            if (!processName.empty() && !windowTitle.empty()) {
+                result[hwnd] = processName + L" - " + windowTitle;
+            } else if (!processName.empty()) {
                 result[hwnd] = processName;
             } else {
-                result[hwnd] = GetWindowTitle(hwnd);
+                result[hwnd] = windowTitle;
             }
         }
     }

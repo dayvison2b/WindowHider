@@ -21,9 +21,9 @@ A Windows utility that prevents windows from being captured by screen recording 
 ## Building
 
 1. Clone the repository
-2. Open the solution in Visual Studio 2022
-3. Build the solution in Release mode
-4. The executables will be in the `release` directory
+2. go to build directory and run `cmake ..`
+3. run `cmake --build .`
+4. run `winhider.exe`
 
 ## Usage
 

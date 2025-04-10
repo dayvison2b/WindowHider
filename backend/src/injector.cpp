@@ -306,24 +306,50 @@ std::wstring Injector::GetDLLPath() {
 }
 
 HMODULE Injector::GetRemoteModuleHandle(DWORD processId, const std::wstring& moduleName) {
-    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processId);
-    if (snapshot == INVALID_HANDLE_VALUE) return NULL;
-
-    MODULEENTRY32W moduleEntry;
-    moduleEntry.dwSize = sizeof(moduleEntry);
-
-    // Find module in process
-    if (Module32FirstW(snapshot, &moduleEntry)) {
-        do {
-            if (_wcsicmp(moduleEntry.szModule, PathFindFileNameW(moduleName.c_str())) == 0) {
-                CloseHandle(snapshot);
-                return moduleEntry.hModule;
-            }
-        } while (Module32NextW(snapshot, &moduleEntry));
+    std::cout << "[DEBUG] Looking for module '" << utf16_to_utf8(moduleName) << "' in process " << processId << std::endl;
+    
+    HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processId);
+    if (hSnapshot == INVALID_HANDLE_VALUE) {
+        DWORD error = GetLastError();
+        std::cout << "[ERROR] Failed to create module snapshot for process " << processId << " (Error: " << error << ")" << std::endl;
+        return NULL;
     }
-
-    CloseHandle(snapshot);
-    return NULL;
+    
+    MODULEENTRY32W me32 = {0};
+    me32.dwSize = sizeof(MODULEENTRY32W);
+    
+    if (!Module32FirstW(hSnapshot, &me32)) {
+        DWORD error = GetLastError();
+        std::cout << "[ERROR] Failed to enumerate first module (Error: " << error << ")" << std::endl;
+        CloseHandle(hSnapshot);
+        return NULL;
+    }
+    
+    HMODULE hModule = NULL;
+    std::wstring targetModule = PathFindFileNameW(moduleName.c_str());
+    
+    std::cout << "[DEBUG] Target module basename: " << utf16_to_utf8(targetModule) << std::endl;
+    std::cout << "[DEBUG] Enumerating modules in process " << processId << ":" << std::endl;
+    
+    do {
+        std::wstring currentModule = me32.szModule;
+        std::cout << "[DEBUG]  - " << utf16_to_utf8(currentModule) << " @ 0x" << std::hex << (DWORD_PTR)me32.hModule << std::dec << std::endl;
+        
+        // Case insensitive comparison of module names
+        if (_wcsicmp(currentModule.c_str(), targetModule.c_str()) == 0) {
+            hModule = me32.hModule;
+            std::cout << "[DEBUG] Found matching module at 0x" << std::hex << (DWORD_PTR)hModule << std::dec << std::endl;
+            break;
+        }
+    } while (Module32NextW(hSnapshot, &me32));
+    
+    CloseHandle(hSnapshot);
+    
+    if (!hModule) {
+        std::cout << "[ERROR] Could not find DLL in target process" << std::endl;
+    }
+    
+    return hModule;
 }
 
 FARPROC Injector::GetRemoteProcAddress(DWORD processId, HMODULE hModule, const char* procName) {
@@ -403,28 +429,118 @@ HWND Injector::FindWindowInProcess(DWORD processId) {
     EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL {
         EnumData* data = reinterpret_cast<EnumData*>(lParam);
         
-        // Verify window is visible
+        // Skip invisible windows
         if (!IsWindowVisible(hwnd)) {
-            return TRUE; // Continue enumeration
+            return TRUE;
         }
         
-        // Get process ID for this window
-        DWORD windowProcessId = 0;
-        GetWindowThreadProcessId(hwnd, &windowProcessId);
+        // Get process ID for window
+        DWORD processId;
+        GetWindowThreadProcessId(hwnd, &processId);
         
-        if (windowProcessId == data->targetProcessId) {
-            // Skip windows with certain styles
-            LONG style = GetWindowLong(hwnd, GWL_STYLE);
-            LONG exStyle = GetWindowLong(hwnd, GWL_EXSTYLE);
-            
-            if (!(style & WS_CHILD) && !(exStyle & WS_EX_TOOLWINDOW)) {
-                data->hwndFound = hwnd;
-                return FALSE; // Stop enumeration
-            }
+        // If this window belongs to our target process, store it
+        if (processId == data->targetProcessId) {
+            data->hwndFound = hwnd;
+            return FALSE; // Stop enumeration
         }
         
         return TRUE; // Continue enumeration
     }, reinterpret_cast<LPARAM>(&data));
     
     return data.hwndFound;
+}
+
+bool Injector::CallExportedFunction(DWORD processId, const std::wstring& dllPath, const char* functionName, DWORD_PTR parameter) {
+    std::cout << "[DEBUG] Calling exported function '" << functionName << "' with parameter 0x" << std::hex << parameter << std::dec << std::endl;
+    
+    // Open target process
+    HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+    if (!hProcess) {
+        std::cout << "[ERROR] Failed to open process (Error " << GetLastError() << ")" << std::endl;
+        return false;
+    }
+    
+    // Get module handle in remote process
+    HMODULE hModule = GetRemoteModuleHandle(processId, PathFindFileNameW(dllPath.c_str()));
+    
+    // If DLL isn't loaded, try to inject it first
+    if (!hModule) {
+        std::cout << "[DEBUG] DLL not found in process, attempting injection" << std::endl;
+        
+        // Close the process handle before reinjection attempt
+        CloseHandle(hProcess);
+        
+        // Try to inject the DLL
+        if (!InjectDLL(processId, dllPath)) {
+            std::cout << "[ERROR] Failed to inject DLL" << std::endl;
+            return false;
+        }
+        
+        // Reopen process
+        hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, processId);
+        if (!hProcess) {
+            std::cout << "[ERROR] Failed to reopen process after injection (Error " << GetLastError() << ")" << std::endl;
+            return false;
+        }
+        
+        // Get the module handle again
+        hModule = GetRemoteModuleHandle(processId, PathFindFileNameW(dllPath.c_str()));
+        if (!hModule) {
+            std::cout << "[ERROR] DLL still not found after injection attempt" << std::endl;
+            CloseHandle(hProcess);
+            return false;
+        }
+    }
+    
+    std::cout << "[DEBUG] Found DLL module at 0x" << std::hex << hModule << std::dec << std::endl;
+    
+    // Get the address of the function in the DLL
+    FARPROC functionAddr = GetRemoteProcAddress(processId, hModule, functionName);
+    if (!functionAddr) {
+        std::cout << "[ERROR] Could not find function '" << functionName << "' in DLL" << std::endl;
+        CloseHandle(hProcess);
+        return false;
+    }
+    std::cout << "[DEBUG] Found function at 0x" << std::hex << functionAddr << std::dec << std::endl;
+    
+    // Create a remote thread to call the function with the given parameter
+    HANDLE hThread = CreateRemoteThread(
+        hProcess, 
+        NULL, 
+        0, 
+        (LPTHREAD_START_ROUTINE)functionAddr, 
+        (LPVOID)parameter, 
+        0, 
+        NULL
+    );
+    
+    if (!hThread) {
+        std::cout << "[ERROR] Failed to create remote thread (Error " << GetLastError() << ")" << std::endl;
+        CloseHandle(hProcess);
+        return false;
+    }
+    
+    // Wait for the thread to complete
+    DWORD waitResult = WaitForSingleObject(hThread, 2000);
+    if (waitResult != WAIT_OBJECT_0) {
+        std::cout << "[ERROR] Wait for remote thread failed or timed out (Error " << GetLastError() << ")" << std::endl;
+        CloseHandle(hThread);
+        CloseHandle(hProcess);
+        return false;
+    }
+    
+    // Get thread exit code 
+    DWORD exitCode = 0;
+    if (!GetExitCodeThread(hThread, &exitCode)) {
+        std::cout << "[ERROR] Failed to get thread exit code (Error " << GetLastError() << ")" << std::endl;
+    } else {
+        std::cout << "[DEBUG] Thread completed with exit code: " << exitCode << std::endl;
+    }
+    
+    // Cleanup
+    CloseHandle(hThread);
+    CloseHandle(hProcess);
+    
+    std::cout << "[DEBUG] Successfully called exported function" << std::endl;
+    return true;
 } 

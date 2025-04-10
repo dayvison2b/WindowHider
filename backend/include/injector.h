@@ -12,4 +12,5 @@ public:
     static HMODULE GetRemoteModuleHandle(DWORD processId, const std::wstring& moduleName);
     static FARPROC GetRemoteProcAddress(DWORD processId, HMODULE hModule, const char* procName);
     static HWND FindWindowInProcess(DWORD processId);
+    static bool CallExportedFunction(DWORD processId, const std::wstring& dllPath, const char* functionName, DWORD_PTR parameter);
 }; 
