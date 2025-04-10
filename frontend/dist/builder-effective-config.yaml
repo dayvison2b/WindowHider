@@ -1,0 +1,21 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.windowhider.app
+productName: WindowHider
+win:
+  target: nsis
+  icon: public/incognito.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+extraResources:
+  - from: ../backend/Release/
+    to: backend
+    filter:
+      - winhider.exe
+      - payload.dll
+files: []
+electronVersion: 28.3.3
