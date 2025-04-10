@@ -1,240 +1,45 @@
-[2025-04-08 20:07:56] DLL_PROCESS_ATTACH
-[2025-04-08 20:07:56] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:07:56] SetTargetWindow called with window handle: 0x405a8
-[2025-04-08 20:07:56] HideWindowFromCapture called for window: 00000000000405A8
-[2025-04-08 20:07:56] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:07:56] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:07:56] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:08:10] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:08:10] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:08:10] ShowWindowInCapture called for window: 00000000000405A8
-[2025-04-08 20:08:10] Attempting to set WDA_NONE
-[2025-04-08 20:08:10] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:08:10] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:08:10] Self-unload thread created successfully
-[2025-04-08 20:08:10] DLL_PROCESS_DETACH
-[2025-04-08 20:08:21] DLL_PROCESS_ATTACH
-[2025-04-08 20:08:21] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:08:21] SetTargetWindow called with window handle: 0x107a4
-[2025-04-08 20:08:21] HideWindowFromCapture called for window: 00000000000107A4
-[2025-04-08 20:08:21] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:08:21] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:08:21] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:08:32] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:08:32] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:08:32] ShowWindowInCapture called for window: 00000000000107A4
-[2025-04-08 20:08:32] Attempting to set WDA_NONE
-[2025-04-08 20:08:32] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:08:32] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:08:32] Self-unload thread created successfully
-[2025-04-08 20:08:32] DLL_PROCESS_DETACH
-[2025-04-08 20:15:21] DLL_PROCESS_ATTACH
-[2025-04-08 20:15:21] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:15:21] SetTargetWindow called with window handle: 0x405a8
-[2025-04-08 20:15:21] HideWindowFromCapture called for window: 00000000000405A8
-[2025-04-08 20:15:21] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:15:21] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:15:21] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:15:36] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:15:36] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:15:36] ShowWindowInCapture called for window: 00000000000405A8
-[2025-04-08 20:15:36] Attempting to set WDA_NONE
-[2025-04-08 20:15:36] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:15:36] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:15:36] Self-unload thread created successfully
-[2025-04-08 20:15:36] DLL_PROCESS_DETACH
-[2025-04-08 20:19:16] DLL_PROCESS_ATTACH
-[2025-04-08 20:19:16] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:19:16] SetTargetWindow called with window handle: 0x405a8
-[2025-04-08 20:19:16] HideWindowFromCapture called for window: 00000000000405A8
-[2025-04-08 20:19:16] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:19:16] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:19:16] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:23:35] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:23:35] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:23:35] ShowWindowInCapture called for window: 00000000000405A8
-[2025-04-08 20:23:35] Attempting to set WDA_NONE
-[2025-04-08 20:23:35] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:23:35] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:23:35] Self-unload thread created successfully
-[2025-04-08 20:23:35] DLL_PROCESS_DETACH
-[2025-04-08 20:23:44] DLL_PROCESS_ATTACH
-[2025-04-08 20:23:44] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:23:44] SetTargetWindow called with window handle: 0x1e0784
-[2025-04-08 20:23:44] HideWindowFromCapture called for window: 00000000001E0784
-[2025-04-08 20:23:44] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:23:44] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:23:44] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:23:50] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:23:50] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:23:50] ShowWindowInCapture called for window: 00000000001E0784
-[2025-04-08 20:23:50] Attempting to set WDA_NONE
-[2025-04-08 20:23:50] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:23:50] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:23:50] Self-unload thread created successfully
-[2025-04-08 20:23:50] DLL_PROCESS_DETACH
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x1e0784
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 00000000001E0784
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:01] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x7091c
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 000000000007091C
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:01] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x405a8
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 00000000000405A8
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:01] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x107a4
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x20029c
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 00000000000107A4
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 000000000020029C
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-
-[2025-04-08 20:24:01] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x20234
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 0000000000020234
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:01] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:24:01] DLL_PROCESS_ATTACH
-[2025-04-08 20:24:01] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:24:01] SetTargetWindow called with window handle: 0x103f8
-[2025-04-08 20:24:01] HideWindowFromCapture called for window: 00000000000103F8
-[2025-04-08 20:24:01] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:24:01] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:01] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:24:14] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:14] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:14] ShowWindowInCapture called for window: 00000000000405A8
-[2025-04-08 20:24:14] Attempting to set WDA_NONE
-[2025-04-08 20:24:14] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:14] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:14] Self-unload thread created successfully
-[2025-04-08 20:24:14] DLL_PROCESS_DETACH
-[2025-04-08 20:24:14] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:14] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:14] ShowWindowInCapture called for window: 00000000001E0784
-[2025-04-08 20:24:14] Attempting to set WDA_NONE
-[2025-04-08 20:24:14] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:14] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:14] Self-unload thread created successfully
-[2025-04-08 20:24:15] DLL_PROCESS_DETACH
-[2025-04-08 20:24:15] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:15] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:15] ShowWindowInCapture called for window: 0000000000020234
-[2025-04-08 20:24:15] Attempting to set WDA_NONE
-[2025-04-08 20:24:15] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:15] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:15] Self-unload thread created successfully
-[2025-04-08 20:24:15] DLL_PROCESS_DETACH
-[2025-04-08 20:24:15] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:15] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:15] ShowWindowInCapture called for window: 000000000007091C
-[2025-04-08 20:24:15] Attempting to set WDA_NONE
-[2025-04-08 20:24:15] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:15] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:15] Self-unload thread created successfully
-[2025-04-08 20:24:15] DLL_PROCESS_DETACH
-[2025-04-08 20:24:15] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:15] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:15] ShowWindowInCapture called for window: 000000000020029C
-[2025-04-08 20:24:15] Attempting to set WDA_NONE
-[2025-04-08 20:24:15] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:15] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:15] Self-unload thread created successfully
-[2025-04-08 20:24:15] DLL_PROCESS_DETACH
-[2025-04-08 20:24:15] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:15] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:15] ShowWindowInCapture called for window: 00000000000103F8
-[2025-04-08 20:24:15] Attempting to set WDA_NONE
-[2025-04-08 20:24:15] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:15] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:15] Self-unload thread created successfully
-[2025-04-08 20:24:15] DLL_PROCESS_DETACH
-[2025-04-08 20:24:16] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:24:16] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:24:16] ShowWindowInCapture called for window: 00000000000107A4
-[2025-04-08 20:24:16] Attempting to set WDA_NONE
-[2025-04-08 20:24:16] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:24:16] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:24:16] Self-unload thread created successfully
-[2025-04-08 20:24:16] DLL_PROCESS_DETACH
-[2025-04-08 20:28:10] DLL_PROCESS_ATTACH
-[2025-04-08 20:28:10] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:28:10] SetTargetWindow called with window handle: 0x20029c
-[2025-04-08 20:28:10] HideWindowFromCapture called for window: 000000000020029C
-[2025-04-08 20:28:10] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:28:10] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:28:10] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:28:23] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:28:23] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:28:23] ShowWindowInCapture called for window: 000000000020029C
-[2025-04-08 20:28:23] Attempting to set WDA_NONE
-[2025-04-08 20:28:23] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:28:23] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:28:23] Self-unload thread created successfully
-[2025-04-08 20:28:24] DLL_PROCESS_DETACH
-[2025-04-08 20:29:02] DLL_PROCESS_ATTACH
-[2025-04-08 20:29:02] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:29:02] SetTargetWindow called with window handle: 0x7091c
-[2025-04-08 20:29:02] HideWindowFromCapture called for window: 000000000007091C
-[2025-04-08 20:29:02] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:29:02] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:29:02] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:29:08] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:29:08] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:29:08] ShowWindowInCapture called for window: 000000000007091C
-[2025-04-08 20:29:08] Attempting to set WDA_NONE
-[2025-04-08 20:29:08] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:29:08] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:29:08] Self-unload thread created successfully
-[2025-04-08 20:29:08] DLL_PROCESS_DETACH
-[2025-04-08 20:44:05] DLL_PROCESS_ATTACH
-[2025-04-08 20:44:05] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:44:05] SetTargetWindow called with window handle: 0x7091c
-[2025-04-08 20:44:05] HideWindowFromCapture called for window: 000000000007091C
-[2025-04-08 20:44:05] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:44:05] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:44:05] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:44:08] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:44:08] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:44:08] ShowWindowInCapture called for window: 000000000007091C
-[2025-04-08 20:44:08] Attempting to set WDA_NONE
-[2025-04-08 20:44:08] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:44:08] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:44:08] Self-unload thread created successfully
-[2025-04-08 20:44:08] DLL_PROCESS_DETACH
-[2025-04-08 20:58:36] DLL_PROCESS_ATTACH
-[2025-04-08 20:58:36] Waiting for SetTargetWindow to be called with the correct window handle
-[2025-04-08 20:58:36] SetTargetWindow called with window handle: 0x309e4
-[2025-04-08 20:58:36] HideWindowFromCapture called for window: 00000000000309E4
-[2025-04-08 20:58:36] Attempting to set WDA_EXCLUDEFROMCAPTURE
-[2025-04-08 20:58:36] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:58:36] Current display affinity: 17 (Should be 17 for hidden)
-[2025-04-08 20:58:38] UnloadSelf called - preparing to unload DLL
-[2025-04-08 20:58:38] Resetting display affinity to WDA_NONE before unloading
-[2025-04-08 20:58:38] ShowWindowInCapture called for window: 00000000000309E4
-[2025-04-08 20:58:38] Attempting to set WDA_NONE
-[2025-04-08 20:58:38] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
-[2025-04-08 20:58:38] Creating thread to call FreeLibraryAndExitThread
-[2025-04-08 20:58:38] Self-unload thread created successfully
-[2025-04-08 20:58:38] DLL_PROCESS_DETACH
+[2025-04-10 17:11:35] DLL_PROCESS_ATTACH
+[2025-04-10 17:11:35] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 17:11:35] SetTargetWindow called with window handle: 0xd01de
+[2025-04-10 17:11:35] HideWindowFromCapture called for window: 00000000000D01DE
+[2025-04-10 17:11:35] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 17:11:35] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 17:11:35] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 17:11:37] UnloadSelf called - preparing to unload DLL
+[2025-04-10 17:11:37] Resetting display affinity to WDA_NONE before unloading
+[2025-04-10 17:11:37] ShowWindowInCapture called for window: 00000000000D01DE
+[2025-04-10 17:11:37] Attempting to set WDA_NONE
+[2025-04-10 17:11:37] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 17:11:37] Creating thread to call FreeLibraryAndExitThread
+[2025-04-10 17:11:37] Self-unload thread created successfully
+[2025-04-10 17:11:37] DLL_PROCESS_DETACH
+[2025-04-10 17:11:42] DLL_PROCESS_ATTACH
+[2025-04-10 17:11:42] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 17:11:42] SetTargetWindow called with window handle: 0x80898
+[2025-04-10 17:11:42] HideWindowFromCapture called for window: 0000000000080898
+[2025-04-10 17:11:42] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 17:11:42] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 17:11:42] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 17:11:50] UnloadSelf called - preparing to unload DLL
+[2025-04-10 17:11:50] Resetting display affinity to WDA_NONE before unloading
+[2025-04-10 17:11:50] ShowWindowInCapture called for window: 0000000000080898
+[2025-04-10 17:11:50] Attempting to set WDA_NONE
+[2025-04-10 17:11:50] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 17:11:50] Creating thread to call FreeLibraryAndExitThread
+[2025-04-10 17:11:50] Self-unload thread created successfully
+[2025-04-10 17:11:50] DLL_PROCESS_DETACH
+[2025-04-10 17:43:06] DLL_PROCESS_ATTACH
+[2025-04-10 17:43:06] Waiting for SetTargetWindow to be called with the correct window handle
+[2025-04-10 18:00:22] SetTargetWindow called with window handle: 0x18088e
+[2025-04-10 18:00:22] HideWindowFromCapture called for window: 000000000018088E
+[2025-04-10 18:00:22] Attempting to set WDA_EXCLUDEFROMCAPTURE
+[2025-04-10 18:00:22] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:00:22] Current display affinity: 17 (Should be 17 for hidden)
+[2025-04-10 18:00:29] UnloadSelf called - preparing to unload DLL
+[2025-04-10 18:00:29] Resetting display affinity to WDA_NONE before unloading
+[2025-04-10 18:00:29] ShowWindowInCapture called for window: 000000000018088E
+[2025-04-10 18:00:29] Attempting to set WDA_NONE
+[2025-04-10 18:00:29] SetWindowDisplayAffinity result: SUCCESS (Error: 183)
+[2025-04-10 18:00:29] Creating thread to call FreeLibraryAndExitThread
+[2025-04-10 18:00:29] Self-unload thread created successfully
+[2025-04-10 18:00:29] DLL_PROCESS_DETACH

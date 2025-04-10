@@ -85,6 +85,78 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
     return TRUE;
 }
 
+// Add this helper function before the WindowManager class implementation
+namespace {
+    bool ShouldFilterProcess(const wchar_t* processName) {
+        static const wchar_t* filteredProcesses[] = {
+            L"TextInputHost.exe",
+            L"SystemSettings.exe",
+            L"SearchHost.exe",
+            L"StartMenuExperienceHost.exe"
+        };
+        
+        for (const auto& filtered : filteredProcesses) {
+            if (_wcsicmp(processName, filtered) == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Helper to get the real window title for UWP apps
+    std::wstring GetUWPWindowInfo(HWND hwnd, DWORD& outProcessId) {
+        wchar_t title[256];
+        if (GetWindowTextW(hwnd, title, 256) > 0) {
+            // Use window title if it's meaningful
+            if (wcslen(title) > 0 && wcscmp(title, L"Windows") != 0) {
+                return title;
+            }
+        }
+
+        // Try to find the actual UWP app window
+        DWORD parentProcessId = outProcessId;
+        
+        // First try the main window class
+        wchar_t className[256];
+        if (GetClassNameW(hwnd, className, 256)) {
+            // Look for modern app identifiers in class name
+            if (wcsstr(className, L"ApplicationFrame") != nullptr ||
+                wcsstr(className, L"Windows.UI") != nullptr ||
+                wcsstr(className, L"Microsoft.") != nullptr) {
+                return title;  // Return the window title for modern apps
+            }
+        }
+
+        // Then check child windows
+        EnumChildWindows(hwnd, [](HWND childHwnd, LPARAM lParam) -> BOOL {
+            auto* params = reinterpret_cast<std::pair<DWORD*, std::wstring*>*>(lParam);
+            
+            wchar_t childClass[256];
+            if (GetClassNameW(childHwnd, childClass, 256)) {
+                // Look for common UWP window classes
+                if (wcscmp(childClass, L"Windows.UI.Core.CoreWindow") == 0 ||
+                    wcsstr(childClass, L"ApplicationFrame") != nullptr) {
+                    DWORD childProcessId;
+                    GetWindowThreadProcessId(childHwnd, &childProcessId);
+                    if (childProcessId != *params->first) {
+                        *params->first = childProcessId;
+                        
+                        // Get the child window title
+                        wchar_t childTitle[256];
+                        if (GetWindowTextW(childHwnd, childTitle, 256) > 0) {
+                            *params->second = childTitle;
+                        }
+                        return FALSE;  // Stop enumeration
+                    }
+                }
+            }
+            return TRUE;
+        }, reinterpret_cast<LPARAM>(&std::make_pair(&outProcessId, &std::wstring())));
+
+        return title;
+    }
+}
+
 WindowManager::WindowManager() {
     // Get the path to the state file
     wchar_t appDataPath[MAX_PATH];
@@ -190,112 +262,69 @@ void WindowManager::RestoreHiddenWindows() {
 }
 
 bool WindowManager::HideWindow(HWND hwnd) {
-    std::cout << "[DEBUG] Starting hide process for window handle: " << hwnd << std::endl;
-    
     if (!hwnd || !IsWindow(hwnd)) {
-        std::cout << "[ERROR] Invalid window handle" << std::endl;
         return false;
     }
     
     // Check if already hidden
     if (IsWindowHidden(hwnd)) {
-        std::cout << "[DEBUG] Window is already hidden" << std::endl;
         return true;
+    }
+    
+    // Get process information
+    DWORD processId;
+    GetWindowThreadProcessId(hwnd, &processId);
+    
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processId);
+    if (hProcess) {
+        wchar_t processName[MAX_PATH];
+        DWORD size = MAX_PATH;
+        if (QueryFullProcessImageNameW(hProcess, 0, processName, &size)) {
+            wchar_t* fileName = wcsrchr(processName, L'\\');
+            if (fileName && ShouldFilterProcess(fileName + 1)) {
+                CloseHandle(hProcess);
+                return false;
+            }
+        }
+        CloseHandle(hProcess);
     }
     
     // Get window information
     wchar_t title[256] = {0};
     GetWindowTextW(hwnd, title, sizeof(title)/sizeof(wchar_t));
-    std::cout << "[DEBUG] Window title: " << utf16_to_utf8(title) << std::endl;
     
-    // Get process ID
-    DWORD processId = 0;
-    GetWindowThreadProcessId(hwnd, &processId);
-    std::cout << "[DEBUG] Process ID: " << processId << std::endl;
-    
-    if (processId == 0) {
-        std::cout << "[ERROR] Failed to get process ID" << std::endl;
-        return false;
-    }
-    
-    // Try to check window display affinity before injection
-    DWORD affinity = 0;
-    BOOL success = GetWindowDisplayAffinity(hwnd, &affinity);
-    std::cout << "[DEBUG] Current display affinity: " << (success ? std::to_string(affinity) : "unknown") << std::endl;
-    
-    // Track window state
+    // Create window state
     WindowState state(hwnd, processId, title);
     state.lastUpdated = time(nullptr);
     
-    // Store the window handle for later reference
-    HWND hwndToHide = hwnd;
-    
-    // First try direct method (may only work if we have sufficient permissions)
-    std::cout << "[DEBUG] Attempting direct SetWindowDisplayAffinity call..." << std::endl;
+    // Try direct method first
     BOOL directResult = SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE);
-    std::cout << "[DEBUG] Direct SetWindowDisplayAffinity result: " << (directResult ? "SUCCESS" : "FAILED") << std::endl;
     
     if (directResult) {
-        // Verify the direct call worked
+        // Verify the change
         DWORD checkAffinity = 0;
         if (GetWindowDisplayAffinity(hwnd, &checkAffinity) && checkAffinity == WDA_EXCLUDEFROMCAPTURE) {
-            std::cout << "[DEBUG] Direct method worked! Window is now hidden" << std::endl;
-            state.isInjected = false;  // We didn't inject, but window is hidden
-            hiddenWindows[hwnd] = state;
-            return true;
-        } else {
-            std::cout << "[WARNING] SetWindowDisplayAffinity returned success but affinity is incorrect: " 
-                      << checkAffinity << std::endl;
-        }
-    }
-    
-    // If direct method failed or wasn't reliable, try DLL injection
-    std::cout << "[DEBUG] Trying DLL injection method..." << std::endl;
-    
-    // Get DLL path
-    std::wstring dllPath = Injector::GetDLLPath();
-    std::cout << "[DEBUG] Using DLL: " << utf16_to_utf8(dllPath) << std::endl;
-    
-    // Check if DLL exists
-    if (!PathFileExistsW(dllPath.c_str())) {
-        std::cout << "[ERROR] DLL file does not exist: " << utf16_to_utf8(dllPath) << std::endl;
-        return false;
-    }
-    
-    // Store the window handle in a table or global that the injector can access
-    std::cout << "[DEBUG] Target window handle for hiding: 0x" << std::hex << (DWORD_PTR)hwndToHide << std::dec << std::endl;
-    
-    // Inject DLL
-    std::cout << "[DEBUG] Attempting to inject DLL into process..." << std::endl;
-    bool injected = Injector::InjectDLL(processId, dllPath);
-    std::cout << "[DEBUG] DLL injection result: " << (injected ? "success" : "failed") << std::endl;
-    
-    if (!injected) {
-        std::cout << "[ERROR] Failed to inject DLL" << std::endl;
-        // Check if the direct method might have worked anyway
-        DWORD finalAffinity = 0;
-        if (GetWindowDisplayAffinity(hwnd, &finalAffinity) && finalAffinity == WDA_EXCLUDEFROMCAPTURE) {
-            std::cout << "[DEBUG] DLL injection failed, but window appears to be hidden anyway" << std::endl;
             state.isInjected = false;
             hiddenWindows[hwnd] = state;
             return true;
         }
+    }
+    
+    // If direct method failed, try DLL injection
+    std::wstring dllPath = Injector::GetDLLPath();
+    if (!PathFileExistsW(dllPath.c_str())) {
         return false;
     }
     
-    state.isInjected = true;
-    hiddenWindows[hwnd] = state;
-    
-    // Verify window is hidden by checking display affinity again
-    affinity = 0;
-    success = GetWindowDisplayAffinity(hwnd, &affinity);
-    std::cout << "[DEBUG] Display affinity after injection: " << (success ? std::to_string(affinity) : "unknown") << std::endl;
-    
-    if (!success || affinity != WDA_EXCLUDEFROMCAPTURE) {
-        std::cout << "[WARNING] Window may not be properly hidden. Affinity = " << affinity << std::endl;
+    // Inject DLL
+    Injector injector;
+    if (injector.InjectDLL(processId, dllPath)) {
+        state.isInjected = true;
+        hiddenWindows[hwnd] = state;
+        return true;
     }
     
-    return true;
+    return false;
 }
 
 bool WindowManager::ShowWindow(HWND hwnd) {
@@ -466,11 +495,68 @@ std::wstring WindowManager::GetProcessName(HWND hwnd) const {
     DWORD size = MAX_PATH;
     
     if (QueryFullProcessImageNameW(hProcess, 0, processName, &size)) {
-        // Extract just the filename
         wchar_t* fileName = wcsrchr(processName, L'\\');
         
         if (fileName != NULL) {
             fileName++; // Skip the backslash
+            
+            // Check if we should filter this process
+            if (ShouldFilterProcess(fileName)) {
+                CloseHandle(hProcess);
+                return L"";
+            }
+            
+            // Special handling for UWP apps and MS Teams
+            if (_wcsicmp(fileName, L"ApplicationFrameHost.exe") == 0) {
+                // Get window title first
+                wchar_t title[256];
+                if (GetWindowTextW(hwnd, title, 256) > 0) {
+                    // Check for MS Teams in title
+                    if (wcsstr(title, L"Microsoft Teams") != nullptr || 
+                        wcsstr(title, L"Teams") != nullptr) {
+                        CloseHandle(hProcess);
+                        return L"Microsoft Teams";
+                    }
+                }
+                
+                // Check window class for Teams
+                wchar_t className[256];
+                if (GetClassNameW(hwnd, className, 256)) {
+                    if (wcsstr(className, L"Teams") != nullptr || 
+                        wcsstr(className, L"Microsoft.Teams") != nullptr) {
+                        CloseHandle(hProcess);
+                        return L"Microsoft Teams";
+                    }
+                }
+                
+                // For other UWP apps, try to find the actual process
+                DWORD parentProcessId = processId;
+                EnumChildWindows(hwnd, [](HWND childHwnd, LPARAM lParam) -> BOOL {
+                    wchar_t className[256];
+                    if (GetClassNameW(childHwnd, className, 256)) {
+                        if (wcscmp(className, L"Windows.UI.Core.CoreWindow") == 0) {
+                            DWORD childProcessId;
+                            GetWindowThreadProcessId(childHwnd, &childProcessId);
+                            if (childProcessId != *((DWORD*)lParam)) {
+                                *((DWORD*)lParam) = childProcessId;
+                                return FALSE;
+                            }
+                        }
+                    }
+                    return TRUE;
+                }, (LPARAM)&processId);
+                
+                if (processId != parentProcessId) {
+                    CloseHandle(hProcess);
+                    hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processId);
+                    if (hProcess && QueryFullProcessImageNameW(hProcess, 0, processName, &size)) {
+                        fileName = wcsrchr(processName, L'\\');
+                        if (fileName) {
+                            fileName++;
+                        }
+                    }
+                }
+            }
             
             // Remove the extension
             wchar_t* extension = wcsrchr(fileName, L'.');
@@ -519,6 +605,68 @@ BOOL CALLBACK ScanHiddenWindowsProc(HWND hwnd, LPARAM lParam) {
 
 void WindowManager::ScanForHiddenWindows() {
     EnumWindows(ScanHiddenWindowsProc, reinterpret_cast<LPARAM>(this));
+}
+
+void WindowManager::ListWindows() {
+    std::cout << "Visible windows:\n";
+    int index = 1;
+    EnumWindows([](HWND hwnd, LPARAM lParam) -> BOOL {
+        if (IsWindowVisible(hwnd)) {
+            char title[256];
+            GetWindowTextA(hwnd, title, sizeof(title));
+            
+            // Skip empty titles
+            if (strlen(title) == 0) return TRUE;
+            
+            // Get process name
+            DWORD processId;
+            GetWindowThreadProcessId(hwnd, &processId);
+            HANDLE hProcess = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processId);
+            char processName[MAX_PATH] = {0};
+            
+            if (hProcess) {
+                DWORD size = MAX_PATH;
+                if (QueryFullProcessImageNameA(hProcess, 0, processName, &size)) {
+                    std::cout << "[DEBUG] Raw process name: " << processName << std::endl << std::flush;
+                    // Extract just the filename
+                    char* lastSlash = strrchr(processName, '\\');
+                    if (lastSlash) strcpy(processName, lastSlash + 1);
+                    
+                    // Debug log
+                    std::cerr << "[DEBUG] Process name: " << processName << std::endl;
+                    
+                    // Convert to lowercase for comparison
+                    char processNameLower[MAX_PATH];
+                    strcpy(processNameLower, processName);
+                    for (char* p = processNameLower; *p; ++p) *p = tolower(*p);
+                    
+                    // Debug log
+                    std::cerr << "[DEBUG] Process name (lower): " << processNameLower << std::endl;
+                    
+                    // Filter out system processes
+                    if (strcmp(processNameLower, "systemsettings.exe") == 0 ||
+                        strcmp(processNameLower, "textinputhost.exe") == 0 ||
+                        strcmp(processNameLower, "cursor.exe") == 0) {
+                        std::cerr << "[DEBUG] Filtering out system process: " << processName << std::endl;
+                        CloseHandle(hProcess);
+                        return TRUE;
+                    }
+                    
+                    // For UWP apps, use the window title instead
+                    if (strcmp(processName, "ApplicationFrameHost.exe") == 0) {
+                        if (strlen(title) > 0 && strcmp(title, "Windows") != 0) {
+                            strcpy(processName, title);
+                        }
+                    }
+                }
+                CloseHandle(hProcess);
+            }
+            
+            std::cout << "  " << *((int*)lParam) << ". " << processName << "\n";
+            (*((int*)lParam))++;
+        }
+        return TRUE;
+    }, (LPARAM)&index);
 }
 
 }  // namespace WindowHider 

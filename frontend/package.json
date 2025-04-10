@@ -43,19 +43,29 @@
     },
     "build": {
         "appId": "com.windowhider.app",
-        "productName": "Window Hider",
+        "productName": "WindowHider",
         "directories": {
             "output": "dist"
         },
         "win": {
             "target": "nsis",
-            "icon": "public/icon.ico"
+            "icon": "public/incognito.ico"
         },
         "nsis": {
             "oneClick": false,
             "allowToChangeInstallationDirectory": true,
             "createDesktopShortcut": true,
             "createStartMenuShortcut": true
-        }
+        },
+        "extraResources": [
+            {
+                "from": "../backend/Release/",
+                "to": "backend",
+                "filter": [
+                    "winhider.exe",
+                    "payload.dll"
+                ]
+            }
+        ]
     }
 }

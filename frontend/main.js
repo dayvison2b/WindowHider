@@ -16,23 +16,30 @@ let activeChildProcesses = []; // Track active child processes
 
 // Function to find the backend executable
 function getBackendPath() {
-  // Define possible paths for the backend executable
-  const possiblePaths = [
-    path.join(__dirname, "..", "backend", "Release", "winhider.exe"),
-    path.join(app.getAppPath(), "..", "backend", "Release", "winhider.exe"),
-    path.join(app.getAppPath(), "..", "backend", "Release", "winhider.exe"),
-  ];
+  if (process.env.NODE_ENV === "development") {
+    // Development paths
+    const possiblePaths = [
+      path.join(__dirname, "..", "backend", "Release", "winhider.exe"),
+      path.join(app.getAppPath(), "..", "backend", "Release", "winhider.exe"),
+    ];
 
-  // Find the first valid path
-  for (const p of possiblePaths) {
-    if (fs.existsSync(p)) {
-      return p;
+    for (const p of possiblePaths) {
+      if (fs.existsSync(p)) {
+        console.log("Development backend path:", p);
+        return p;
+      }
     }
+    return path.join(__dirname, "..", "backend", "Release", "winhider.exe");
+  } else {
+    // Production path - this is where the backend is after installation
+    const prodPath = path.join(
+      process.resourcesPath,
+      "backend",
+      "winhider.exe"
+    );
+    console.log("Production backend path:", prodPath);
+    return prodPath;
   }
-
-  // If no valid path is found, return the expected path anyway
-  // The error handling will be done in the renderer
-  return path.join(__dirname, "..", "backend", "Release", "winhider.exe");
 }
 
 // Kill all tracked child processes
@@ -110,12 +117,23 @@ function createWindow() {
 
   // Add handler for getting backend path
   ipcMain.on("get-backend-path", (event) => {
-    // Send the path to the backend executable
-    event.returnValue = getBackendPath();
+    const backendPath = getBackendPath();
+    console.log("Checking backend path:", backendPath);
+
+    if (!fs.existsSync(backendPath)) {
+      console.error("Backend executable not found at:", backendPath);
+      event.returnValue = {
+        error: "Backend executable not found",
+        path: backendPath,
+      };
+    } else {
+      console.log("Backend executable found at:", backendPath);
+      event.returnValue = backendPath;
+    }
   });
 
   // Open the DevTools
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 
   // Handle window close event
   mainWindow.on("closed", () => {

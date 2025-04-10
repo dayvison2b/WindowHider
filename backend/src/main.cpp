@@ -87,8 +87,35 @@ BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM lParam) {
         return TRUE;
     }
     
-    // Get window title
+    // Get window title and process name
     wchar_t title[256];
+    DWORD processId;
+    GetWindowThreadProcessId(hwnd, &processId);
+    
+    wchar_t processPath[MAX_PATH] = {0};
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processId);
+    if (hProcess) {
+        DWORD size = MAX_PATH;
+        if (QueryFullProcessImageNameW(hProcess, 0, processPath, &size)) {
+            // Get just the filename
+            wchar_t* fileName = PathFindFileNameW(processPath);
+            
+            // Convert to lowercase for comparison
+            wchar_t fileNameLower[MAX_PATH];
+            wcscpy(fileNameLower, fileName);
+            _wcslwr(fileNameLower);
+            
+            // Filter out system processes
+            if (wcscmp(fileNameLower, L"systemsettings.exe") == 0 ||
+                wcscmp(fileNameLower, L"textinputhost.exe") == 0) {
+                CloseHandle(hProcess);
+                return TRUE;
+            }
+        }
+        CloseHandle(hProcess);
+    }
+    
+    // Get window title
     if (GetWindowTextW(hwnd, title, sizeof(title)/sizeof(wchar_t)) > 0) {
         // Skip empty title windows
         if (wcslen(title) > 0) {
@@ -101,7 +128,7 @@ BOOL CALLBACK EnumWindowsCallback(HWND hwnd, LPARAM lParam) {
 
 // Helper function to get window title
 std::wstring GetWindowTitleText(HWND hwnd) {
-    // Get just the process name
+    // Get process name
     DWORD processId;
     GetWindowThreadProcessId(hwnd, &processId);
     
@@ -109,13 +136,25 @@ std::wstring GetWindowTitleText(HWND hwnd) {
     HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, processId);
     if (hProcess) {
         DWORD size = MAX_PATH;
-        QueryFullProcessImageNameW(hProcess, 0, processName, &size);
+        if (QueryFullProcessImageNameW(hProcess, 0, processName, &size)) {
+            wchar_t* fileName = PathFindFileNameW(processName);
+            
+            // For UWP apps (ApplicationFrameHost.exe), use window title instead
+            if (_wcsicmp(fileName, L"ApplicationFrameHost.exe") == 0) {
+                wchar_t title[256];
+                if (GetWindowTextW(hwnd, title, sizeof(title)/sizeof(wchar_t)) > 0) {
+                    CloseHandle(hProcess);
+                    return title;
+                }
+            }
+            
+            // For regular apps, return executable name without extension
+            wchar_t* extension = wcsrchr(fileName, L'.');
+            if (extension) *extension = L'\0';
+            CloseHandle(hProcess);
+            return fileName;
+        }
         CloseHandle(hProcess);
-    }
-    
-    // Return just the executable name
-    if (wcslen(processName) > 0) {
-        return PathFindFileNameW(processName);
     }
     
     return L"Unknown";

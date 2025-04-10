@@ -10,18 +10,18 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-# Set output directories for all targets to a single location
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/dist/bin)
+# Set output directories
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/release)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/release)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/release)
 
-# Ensure these settings override multi-config generators
-foreach(CONFIG_TYPE ${CMAKE_CONFIGURATION_TYPES})
-  string(TOUPPER ${CONFIG_TYPE} CONFIG_TYPE)
-  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${CONFIG_TYPE} ${CMAKE_SOURCE_DIR}/dist/bin)
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${CONFIG_TYPE} ${CMAKE_SOURCE_DIR}/dist/bin)
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${CONFIG_TYPE} ${CMAKE_SOURCE_DIR}/dist/bin)
-endforeach()
+# Set output directories for multi-configuration generators (like Visual Studio)
+foreach(OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES})
+    string(TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG)
+    set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/release)
+    set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/release)
+    set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/release)
+endforeach(OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES)
 
 # Common source files
 set(COMMON_SOURCES
@@ -68,5 +68,5 @@ set_target_properties(winhider payload PROPERTIES
 
 # Install target - simplified to a single location
 install(TARGETS winhider payload
-        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/dist/bin
-        LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/dist/bin) 
+        RUNTIME DESTINATION ${CMAKE_SOURCE_DIR}/release
+        LIBRARY DESTINATION ${CMAKE_SOURCE_DIR}/release) 

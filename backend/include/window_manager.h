@@ -52,6 +52,7 @@ public:
 
     std::unordered_map<HWND, std::wstring> GetAllVisibleWindows() const;
     std::unordered_map<HWND, std::wstring> GetHiddenWindows() const;
+    void ListWindows();
 
     std::wstring GetWindowTitle(HWND hwnd) const;
     std::wstring GetProcessName(HWND hwnd) const;
