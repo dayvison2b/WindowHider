@@ -242,7 +242,27 @@ int main(int argc, char* argv[]) {
     // Initial window enumeration
     RefreshWindowLists();
     
-    // Check if running as admin
+    // Check if command line arguments were provided to run a command directly
+    if (argc > 1) {
+        std::string cmdArg = argv[1];
+        std::wstring command = utf8_to_utf16(cmdArg);
+        
+        std::wstring args = L"";
+        if (argc > 2) {
+            std::string argsStr;
+            for (int i = 2; i < argc; i++) {
+                argsStr += argv[i];
+                if (i < argc - 1) argsStr += " ";
+            }
+            args = utf8_to_utf16(argsStr);
+        }
+        
+        bool running = true;
+        processCommand(command, args, running);
+        return 0;
+    }
+    
+    // Interactive mode - show admin warning only here
     if (!IsRunningAsAdmin()) {
         std::cout << "\n[WARNING] This application is not running with administrator privileges.\n"
                   << "Some window operations may fail due to insufficient permissions.\n"
